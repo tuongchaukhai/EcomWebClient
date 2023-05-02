@@ -3,9 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AdminModule } from './admin/admin.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ReusableTableComponent } from './shared/reusable-table/reusable-table.component';
+import { AdminModule } from './admin/admin.module';
 
 @NgModule({
   declarations: [
