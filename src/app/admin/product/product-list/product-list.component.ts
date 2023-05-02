@@ -8,14 +8,14 @@ import { ProductDto } from '../dto/product.dto';
   styleUrls: ['./product-list.component.scss']
 })
 export class ProductListComponent implements OnInit {
-  product: ProductDto[] = [];
+  products: ProductDto[] = [];
 
   constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
     
-    this.productService.getAll().subscribe(
-      response => this.product = response,
+    this.productService.getAll().subscribe( 
+      response => this.products = response.data,
       err => err
     );
   }

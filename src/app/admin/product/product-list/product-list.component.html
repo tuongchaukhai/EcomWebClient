@@ -1,1 +1,20 @@
-<p>product-list works!</p>
+<p-table [value]="products" [tableStyle]="{'min-width': '60rem'}">
+    <ng-template pTemplate="header">
+        <tr>
+            <th pSortableColumn="productId" style="width:20%">ID <p-sortIcon field="productId"></p-sortIcon></th>
+            <th pSortableColumn="productName" style="width:20%">Title <p-sortIcon field="productName"></p-sortIcon></th>
+            <th pSortableColumn="price" style="width:20%">Price <p-sortIcon field="price"></p-sortIcon></th>
+            <th pSortableColumn="unitInStock" style="width:20%">Quantity <p-sortIcon field="unitInStock"></p-sortIcon></th>
+            <th pSortableColumn="categoryName" style="width:20%">Category <p-sortIcon field="categoryName"></p-sortIcon></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+        <tr>
+            <td>{{product.productId}}</td>
+            <td>{{product.productName}}</td>
+            <td>{{product.price | currency: 'USD'}}</td>
+            <td>{{product.unitInStock}}</td>
+            <td>{{product.categoryName}}</td>
+        </tr>
+    </ng-template>
+</p-table>

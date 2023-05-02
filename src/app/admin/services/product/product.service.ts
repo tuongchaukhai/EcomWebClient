@@ -14,7 +14,6 @@ export class ProductService {
   private url = 'https://localhost:7209/api/product';
 
   getAll(): Observable<any> {
-    debugger
     return this.http.get<any>(`${this.url}`).pipe(
       catchError(error => this.errorHandler.handleError(error))
     );
