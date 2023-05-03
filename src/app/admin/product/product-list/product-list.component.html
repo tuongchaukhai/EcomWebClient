@@ -1,20 +1,41 @@
-<p-table [value]="products" [tableStyle]="{'min-width': '60rem'}">
+<p-table [value]="products" class="table-width">
+    <ng-template pTemplate="caption">
+        <div class="flex align-items-center justify-content-between">
+            <div>
+                <p>Product Management</p>
+            </div>
+            <div class="p-inputgroup" style="width: 300px;">
+                <input type="text" pInputText placeholder="Search" />
+                <button pButton type="button" icon="pi pi-search"></button>
+            </div>
+        </div>
+    </ng-template>
     <ng-template pTemplate="header">
         <tr>
-            <th pSortableColumn="productId" style="width:20%">ID <p-sortIcon field="productId"></p-sortIcon></th>
-            <th pSortableColumn="productName" style="width:20%">Title <p-sortIcon field="productName"></p-sortIcon></th>
-            <th pSortableColumn="price" style="width:20%">Price <p-sortIcon field="price"></p-sortIcon></th>
-            <th pSortableColumn="unitInStock" style="width:20%">Quantity <p-sortIcon field="unitInStock"></p-sortIcon></th>
-            <th pSortableColumn="categoryName" style="width:20%">Category <p-sortIcon field="categoryName"></p-sortIcon></th>
+            <th pSortableColumn="productId">ID <p-sortIcon field="productId"></p-sortIcon></th>
+            <th pSortableColumn="productName">Title <p-sortIcon field="productName"></p-sortIcon></th>
+            <th>Image</th>
+            <th pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon></th>
+            <th pSortableColumn="unitInStock">Quantity <p-sortIcon field="unitInStock"></p-sortIcon></th>
+            <th pSortableColumn="categoryName">Category <p-sortIcon field="categoryName"></p-sortIcon>
+            </th>
+            <th>#</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-product>
         <tr>
             <td>{{product.productId}}</td>
             <td>{{product.productName}}</td>
+            <td><img [src]="'https://99designs-blog.imgix.net/blog/wp-content/uploads/2017/02/Anatomy_book_cover.png?auto=format&q=60&w=3300&h=1856.25&fit=crop&crop=faces'" [alt]="product.name" width="100" class="shadow-4" /></td>
             <td>{{product.price | currency: 'USD'}}</td>
             <td>{{product.unitInStock}}</td>
             <td>{{product.categoryName}}</td>
+            <td>
+                <div class="button-action">
+                    <p-button label="Edit" icon="pi pi-pencil" styleClass="p-button-warning"></p-button>
+                    <p-button label="Remove" icon="pi pi-trash" styleClass="p-button-danger"></p-button>
+                </div>
+            </td>
         </tr>
     </ng-template>
 </p-table>

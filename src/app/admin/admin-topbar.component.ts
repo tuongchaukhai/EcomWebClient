@@ -7,25 +7,24 @@ import { MenuItem } from 'primeng/api';
 })
 export class AdminTopbarComponent implements OnInit {
   items: MenuItem[] = [];
+  name: string = 'temp';
 
   ngOnInit(): void {
     this.items = [
       {
-        label: 'Products',
-        icon: 'pi pi-fw pi-shopping-bag',
+        label: 'Settings',
+        icon: 'pi pi-cog',
+        // command: () => {
+        //     this.update();
+        // }
       },
       {
-        label: 'Employees',
-        icon: 'pi pi-fw pi-user',
-      },
-      {
-        label: 'Users',
-        icon: 'pi pi-fw pi-users',
-      },
-      {
-        label: 'Quit',
-        icon: 'pi pi-fw pi-power-off'
+        label: 'Logout',
+        icon: 'pi pi-sign-out',
+        // command: () => {
+        //     this.delete();
+        // }
       }
-    ];
+    ]
   }
 }

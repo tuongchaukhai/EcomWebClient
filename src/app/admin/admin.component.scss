@@ -16,3 +16,18 @@
 .header__navbar-item {
     display: inline-block;
 }
+
+.admin-layout__body {
+    display: flex;
+}
+
+.layout-main-container{
+    width: 100%;
+    padding-top: 20px;
+    padding-left: 20px;
+}   
+
+.admin-layout__body-sidebar {
+    padding-top: 20px;
+    
+}

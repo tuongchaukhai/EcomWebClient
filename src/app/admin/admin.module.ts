@@ -1,16 +1,15 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { ProductListComponent } from './product/product-list/product-list.component';
 import { AdminComponent } from './admin.component';
 
-import { InputMaskModule } from 'primeng/inputmask';
-import { TableModule } from 'primeng/table';
-import { MenubarModule } from 'primeng/menubar';
+
 import { AdminTopbarComponent } from './admin-topbar.component';
 import { AdminSidebarComponent } from './admin-sidebar.component';
 import { AdminMenuComponent } from './admin-menu.component';
+import { SharedModule } from '../shared/shared.module';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -22,11 +21,10 @@ import { AdminMenuComponent } from './admin-menu.component';
   ],
   imports: [
     CommonModule,
+    SharedModule,
     AdminRoutingModule,
-    TableModule,
-    MenubarModule,
-    InputMaskModule
 
   ]
 })
-export class AdminModule { }
+export class AdminModule {
+}
