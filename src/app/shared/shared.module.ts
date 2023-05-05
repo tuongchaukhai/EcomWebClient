@@ -10,6 +10,16 @@ import { ToastModule } from 'primeng/toast';
 import { TableModule } from 'primeng/table';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { DropdownModule } from 'primeng/dropdown';
+import { DialogService } from 'primeng/dynamicdialog';
+import { KeyFilterModule } from 'primeng/keyfilter';
+import { CardModule } from 'primeng/card';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { ChipsModule } from 'primeng/chips';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { DividerModule } from 'primeng/divider';
+import { PanelModule } from 'primeng/panel';
+import { DialogModule } from 'primeng/dialog';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     imports: [
@@ -26,10 +36,20 @@ import { DropdownModule } from 'primeng/dropdown';
         ToastModule,
         RouterModule,
         SplitButtonModule,
-        DropdownModule
+        DropdownModule,
+        KeyFilterModule,
+        CardModule,
+        InputSwitchModule,
+        ChipsModule,
+        InputTextareaModule,
+        DividerModule,
+        PanelModule,
+        DialogModule,
+        ReactiveFormsModule,
+        FormsModule 
     ],
     providers: [
-
+        DialogService
     ]
 })
 

@@ -24,7 +24,7 @@ export class ErrorHandlerService {
       //   errorMessage = `You didn't have permission to`;
       // }
       // else {
-      errorMessage = `Error Code: ${error.status}`;
+      errorMessage = `Error Code: ${error.message} `;
     }
     console.error(errorMessage);
     alert(errorMessage);

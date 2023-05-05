@@ -10,6 +10,7 @@ import { AdminSidebarComponent } from './admin-sidebar.component';
 import { AdminMenuComponent } from './admin-menu.component';
 import { SharedModule } from '../shared/shared.module';
 import { CommonModule } from '@angular/common';
+import { ProductUpdateComponent } from './product/product-update/product-update.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { CommonModule } from '@angular/common';
     AdminComponent,
     AdminTopbarComponent,
     AdminSidebarComponent,
-    AdminMenuComponent
+    AdminMenuComponent,
+    ProductUpdateComponent
   ],
   imports: [
     CommonModule,

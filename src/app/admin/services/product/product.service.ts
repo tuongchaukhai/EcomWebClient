@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ProductDto } from '../../product/dto/product.dto';
-import { Observable, catchError } from 'rxjs';
+import { Observable, catchError, map } from 'rxjs';
 import { ErrorHandlerService } from 'src/app/providers/error-handler.service';
+import { ProductUpdateDto } from '../../product/dto/product-update.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +15,17 @@ export class ProductService {
 
   getAll(): Observable<any> {
     return this.http.get<any>(`${this.url}`).pipe(
-      catchError(error => this.errorHandler.handleError(error))
+      // catchError(error => this.errorHandler.handleError(error))
     );
   }
 
+  update(product: ProductUpdateDto): Observable<any> {
+    return this.http.put<any>(`${this.url}`, product).pipe(
+      map(response => {
+        return response.message
+      }),
+      catchError(error => this.errorHandler.handleError(error))
+    );
+  }
 }
+
