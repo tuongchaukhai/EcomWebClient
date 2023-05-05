@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, map } from 'rxjs';
 import { ErrorHandlerService } from 'src/app/providers/error-handler.service';
 import { ProductUpdateDto } from '../../product/dto/product-update.dto';
+import { ProductResultDto } from '../../product/dto/product-result.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -27,5 +28,13 @@ export class ProductService {
       catchError(error => this.errorHandler.handleError(error))
     );
   }
+
+  delete(productId: number | any): Observable<any> {
+    debugger
+    return this.http.delete<any>(`${this.url}?=id=${productId}`).pipe(
+      catchError(error => this.errorHandler.handleError(error))
+    );
+  }
+
 }
 

@@ -3,6 +3,7 @@ import { ProductService } from '../../services/product/product.service';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ProductUpdateComponent } from '../product-update/product-update.component';
 import { ProductUpdateDto } from '../dto/product-update.dto';
+import { ProductResultDto } from '../dto/product-result.dto';
 
 @Component({
   selector: 'app-product-list',
@@ -12,7 +13,8 @@ import { ProductUpdateDto } from '../dto/product-update.dto';
 export class ProductListComponent implements OnInit {
   products: any[] = [];
   ref?: DynamicDialogRef;
-  visible: boolean = false;
+  visibleDeleteDialog: boolean = false;
+  selectedProduct?: any;
   constructor(private dialogService: DialogService, private productService: ProductService) { }
 
   ngOnInit(): void {
@@ -21,7 +23,7 @@ export class ProductListComponent implements OnInit {
     );
   }
 
-  updateShow(product: ProductUpdateDto) {
+  updateShow(product: ProductUpdateDto): void {
     this.ref = this.dialogService.open(ProductUpdateComponent, {
       width: '50%',
       contentStyle: { overflow: 'auto' },
@@ -34,6 +36,21 @@ export class ProductListComponent implements OnInit {
         response => this.products = response.data,
       ));
 
-    // this.visible = true;
+  }
+
+  deleteShow(product: any): void {
+    this.visibleDeleteDialog = true;
+    this.selectedProduct = product;
+  }
+
+  deleteProduct(product: any): void {
+    
+    this.productService.delete(product.productId).subscribe(
+      response => {
+        
+        alert(response);
+      },
+      err => err
+    );
   }
 }

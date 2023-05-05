@@ -26,16 +26,29 @@
         <tr>
             <td>{{product.productId}}</td>
             <td>{{product.productName}}</td>
-            <td><img [src]="'https://99designs-blog.imgix.net/blog/wp-content/uploads/2017/02/Anatomy_book_cover.png?auto=format&q=60&w=3300&h=1856.25&fit=crop&crop=faces'" [alt]="product.name" width="100" class="shadow-4" /></td>
+            <td><img [src]="'https://99designs-blog.imgix.net/blog/wp-content/uploads/2017/02/Anatomy_book_cover.png?auto=format&q=60&w=3300&h=1856.25&fit=crop&crop=faces'"
+                    [alt]="product.name" width="100" class="shadow-4" /></td>
             <td>{{product.price | currency: 'USD'}}</td>
             <td>{{product.unitInStock}}</td>
             <td>{{product.categoryName}}</td>
             <td>
                 <div class="button-action">
-                    <p-button label="Edit" icon="pi pi-pencil" styleClass="p-button-warning" (click)="updateShow(product)"></p-button>
-                    <p-button label="Remove" icon="pi pi-trash" styleClass="p-button-danger"></p-button>
+                    <p-button label="Edit" icon="pi pi-pencil" styleClass="p-button-warning"
+                        (click)="updateShow(product)"></p-button>
+                    <p-button label="Remove" icon="pi pi-trash" styleClass="p-button-danger"
+                        (click)="deleteShow(product)"></p-button>
                 </div>
             </td>
         </tr>
     </ng-template>
 </p-table>
+
+
+<p-dialog header="Product delete" [(visible)]="visibleDeleteDialog" [modal]="true" [style]="{ width: '30vw' }">
+    <p>Are you sure delete <span style="color: red;">"{{selectedProduct?.productName}}"</span> book?</p>
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" label="YES" (click)="deleteProduct(selectedProduct)" styleClass="p-button-text"></p-button>
+        <p-button icon="pi pi-check" label="NO" (click)="visibleDeleteDialog = false; selectedProduct = undefined"
+            styleClass="p-button-text"></p-button>
+    </ng-template>
+</p-dialog>

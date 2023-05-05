@@ -36,15 +36,12 @@ export class ProductUpdateComponent implements OnInit {
       unitInStock: [this.config.data.product.unitInStock, [Validators.required, Validators.pattern("^[0-9]*$")]],
       categoryId: [this.config.data.product.categoryID]
     });
-
-
   }
 
   ngOnInit(): void {
     this.categoryService.getAll().subscribe(
       response => {
         this.categories = response.data
-        console.log(this.categories);
       },
       err => err
     );

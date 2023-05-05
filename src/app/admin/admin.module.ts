@@ -11,6 +11,7 @@ import { AdminMenuComponent } from './admin-menu.component';
 import { SharedModule } from '../shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { ProductUpdateComponent } from './product/product-update/product-update.component';
+import { ProductCreateComponent } from './product/product-create/product-create.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ProductUpdateComponent } from './product/product-update/product-update.
     AdminTopbarComponent,
     AdminSidebarComponent,
     AdminMenuComponent,
-    ProductUpdateComponent
+    ProductUpdateComponent,
+    ProductCreateComponent
   ],
   imports: [
     CommonModule,
