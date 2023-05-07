@@ -12,6 +12,7 @@ import { SharedModule } from '../shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { ProductUpdateComponent } from './product/product-update/product-update.component';
 import { ProductCreateComponent } from './product/product-create/product-create.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ProductCreateComponent } from './product/product-create/product-create.
     AdminSidebarComponent,
     AdminMenuComponent,
     ProductUpdateComponent,
-    ProductCreateComponent
+    ProductCreateComponent,
+    DashboardComponent,
   ],
   imports: [
     CommonModule,
