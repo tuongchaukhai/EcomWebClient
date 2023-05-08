@@ -1,1 +1,112 @@
-<p>product-create works!</p>
+<p-card header="Product Create" class="grid p-scroller">
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" label="Ok" (onClick)="submit()" styleClass="p-button-text"></p-button>
+    </ng-template>
+    <form [formGroup]="formData">
+        <div class="p-fluid p-formgrid grid">
+            <p-divider align="left" class="md:col-12">
+                <div class="inline-flex align-items-center">
+                    <i class="pi pi-info-circle mr-2"></i>
+                    <b>Info</b>
+                </div>
+            </p-divider>
+            <div class="field col-12 md:col-12">
+                <label htmlFor="productName">Title</label>
+                <input pInputText id="productName" formControlName="productName" type="text" />
+                <small class="p-error" *ngIf="formData.get('productName')?.hasError('required')">Title is required. </small>
+                <small class="p-error" *ngIf="formData.get('productName')?.hasError('maxlength')">Title cannot exceed 255 characters.</small>
+            </div>
+
+
+            <div class="field col-12 md:col-6">
+                <label htmlFor="categoryName">Category</label>
+                <p-dropdown formControlName="categoryId" [options]="categories"  optionLabel="categoryName" optionValue="categoryId"></p-dropdown>
+            </div>
+
+            <div class="field col-12 md:col-2">
+                <label htmlFor="unitInStock">Quantity</label>
+                <input pInputText pKeyFilter="money" pInputText id="unitInStock" formControlName="unitInStock">
+                <small class="p-error" *ngIf="formData.get('unitInStock')?.hasError('required')">Quantity is required. </small>
+            </div>
+
+
+            <div class="field col-12 md:col-2">
+                <label htmlFor="price">Price</label>
+                <input pInputText pKeyFilter="money" id="price" formControlName="price" />
+                <small class="p-error" *ngIf="formData.get('price')?.hasError('required')">Price is required. </small>
+          </div>
+            <div class="field col-12 md:col-2">
+                <label htmlFor="discount">Discount</label>
+                <input pInputText pKeyFilter="money" id="discount" formControlName="discount" />
+           </div>
+            <div class="field col-12 md:col-12">
+                <label htmlFor="description">Description</label>
+                <textarea pInputTextarea id="description" rows="4" formControlName="description"></textarea>
+            </div>
+            <div class="field col-12 md:col-6">
+                <label htmlFor="thumb">Thumb</label>
+                <input pInputText id="thumb" formControlName="thumb" />
+                <small class="p-error" *ngIf="formData.get('thumb')?.hasError('required')">Thumb URL is required. </small>
+                <small class="p-error" *ngIf="formData.get('thumb')?.hasError('maxlength')">Thumb URL cannot exceed 255 characters.</small>
+            </div>
+            <div class="field col-12 md:col-6">
+                <label htmlFor="video">Video</label>
+                <input pInputText id="video" formControlName="video" />
+                <small class="p-error" *ngIf="formData.get('video')?.hasError('maxlength')">Video URL cannot exceed 255 characters.</small>
+            </div>
+
+            <p-divider align="left" class="md:col-12">
+                <div class="inline-flex align-items-center">
+                    <i class="pi pi-cog mr-2"></i>
+                    <b>Config</b>
+                </div>
+            </p-divider>
+
+            <div class="field col-12 md:col-12">
+                <label htmlFor="tags">Tags</label>
+                <p-chips id="tags" formControlName="tags" />
+            </div>
+
+            <div class="field col-12 md:col-4">
+                <label htmlFor="bestSeller" class="mr-2">BestSeller</label>
+                <p-inputSwitch id="bestSeller" formControlName="bestSeller"></p-inputSwitch>
+            </div>
+
+            <div class="field col-12 md:col-4">
+                <label htmlFor="homeFlag" class="mr-2">HomeFlag</label>
+                <p-inputSwitch id="homeFlag" formControlName="homeFlag"></p-inputSwitch>
+            </div>
+
+            <div class="field col-12 md:col-4">
+                <label htmlFor="active" class="mr-2">Active</label>
+                <p-inputSwitch id="active" formControlName="active"></p-inputSwitch>
+            </div>
+
+            <div class="field col-12 md:col-6">
+                <label htmlFor="shortDesc">ShortDesc</label>
+                <input pInputText id="shortDesc" formControlName="shortDesc" />
+                <small class="p-error" *ngIf="formData.get('shortDesc')?.hasError('maxlength')">ShortDesc cannot exceed 255 characters.</small>
+
+            </div>
+
+            <div class="field col-12 md:col-6">
+                <label htmlFor="alias">Alias</label>
+                <input pInputText id="alias" formControlName="alias" />
+                <small class="p-error" *ngIf="formData.get('alias')?.hasError('maxlength')">Alias cannot exceed 255 characters.</small>
+                
+            </div>
+
+            <div class="field col-12 md:col-6">
+                <label htmlFor="metaDesc">MetaDesc</label>
+                <input pInputText id="metaDesc" formControlName="metaDesc" />
+                <small class="p-error" *ngIf="formData.get('metaDesc')?.hasError('maxlength')">MetaDesc cannot exceed 255 characters.</small>
+            </div>
+
+            <div class="field col-12 md:col-6">
+                <label htmlFor="metaKey">MetaKey</label>
+                <input pInputText id="metaKey" formControlName="metaKey" />
+                <small class="p-error" *ngIf="formData.get('metaKey')?.hasError('maxlength')">MetaKey cannot exceed 255 characters.</small>
+            </div>
+        </div>
+    </form>
+</p-card>

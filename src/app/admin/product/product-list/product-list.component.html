@@ -1,19 +1,25 @@
-<p-table [value]="products" class="table-width">
+<p-table [value]="products" class="table-width" [lazy]="true" (onLazyLoad)="loadLazy($event)" [paginator]="true"
+    [rows]="rows" [totalRecords]="totalRecords"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
     <ng-template pTemplate="caption">
         <div class="flex align-items-center justify-content-between">
             <div>
                 <p>Product Management</p>
             </div>
-            <div class="p-inputgroup" style="width: 300px;">
-                <input type="text" pInputText placeholder="Search" />
-                <button pButton type="button" icon="pi pi-search"></button>
+            <div class="flex">
+                <p-button label="Create" icon="pi pi-plus" (onClick)="createShow()"></p-button>
+                <div class="p-inputgroup" style="width: 300px; margin-left: 10px;">
+                    <input type="text" pInputText placeholder="Search" />
+                    <button pButton type="button" icon="pi pi-search" class="p-button-secondary"></button>
+                </div>
             </div>
         </div>
     </ng-template>
     <ng-template pTemplate="header">
         <tr>
             <th pSortableColumn="productId">ID <p-sortIcon field="productId"></p-sortIcon></th>
-            <th pSortableColumn="productName">Title <p-sortIcon field="productName"></p-sortIcon></th>
+            <th pSortableColumn="productName" [style]="{width: '30%'}">Title <p-sortIcon
+                    field="productName"></p-sortIcon></th>
             <th>Image</th>
             <th pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon></th>
             <th pSortableColumn="unitInStock">Quantity <p-sortIcon field="unitInStock"></p-sortIcon></th>
@@ -47,7 +53,8 @@
 <p-dialog header="Product delete" [(visible)]="visibleDeleteDialog" [modal]="true" [style]="{ width: '30vw' }">
     <p>Are you sure delete <span style="color: red;">"{{selectedProduct?.productName}}"</span> book?</p>
     <ng-template pTemplate="footer">
-        <p-button icon="pi pi-check" label="YES" (click)="deleteProduct(selectedProduct)" styleClass="p-button-text"></p-button>
+        <p-button icon="pi pi-check" label="YES" (click)="deleteProduct(selectedProduct)"
+            styleClass="p-button-text"></p-button>
         <p-button icon="pi pi-check" label="NO" (click)="visibleDeleteDialog = false; selectedProduct = undefined"
             styleClass="p-button-text"></p-button>
     </ng-template>

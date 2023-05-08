@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CategoryService } from '../../services/category/category.service';
-import { ProductUpdateDto } from '../dto/product-update.dto';
 import { ProductService } from '../../services/product/product.service';
 
 
@@ -48,6 +47,7 @@ export class ProductUpdateComponent implements OnInit {
   }
 
   saveProduct() {
+    
     this.productService.update(this.formData.value).subscribe(
       response => {
         alert(response);
@@ -60,7 +60,4 @@ export class ProductUpdateComponent implements OnInit {
   cancel() {
     this.ref.close();
   }
-
-
-
 }
