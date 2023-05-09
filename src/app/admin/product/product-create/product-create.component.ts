@@ -56,7 +56,6 @@ export class ProductCreateComponent {
     }
     this.productService.create(product).subscribe(
       response => {
-
         alert(response);
         this.ref.close();
       },

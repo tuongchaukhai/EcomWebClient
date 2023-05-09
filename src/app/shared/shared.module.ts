@@ -23,6 +23,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { RippleModule } from 'primeng/ripple';
 import { CheckboxModule } from 'primeng/checkbox';
+import { PasswordModule } from 'primeng/password';
 
 @NgModule({
     imports: [
@@ -51,7 +52,8 @@ import { CheckboxModule } from 'primeng/checkbox';
         ReactiveFormsModule,
         FormsModule ,
         RippleModule,
-        CheckboxModule
+        CheckboxModule,
+        PasswordModule
     ],
     providers: [
         DialogService

@@ -1,0 +1,53 @@
+<p-card header="User Create" class="grid p-scroller">
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" label="Ok" (onClick)="submit()" styleClass="p-button-text"></p-button>
+    </ng-template>
+    <form [formGroup]="formData">
+        <div class="p-fluid p-formgrid grid">
+            <div class="field col-12 md:col-12">
+                <label htmlFor="fullName">FullName</label>
+                <input pInputText id="fullName" formControlName="fullName" type="text" />
+                <small class="p-error" *ngIf="formData.get('fullName')?.hasError('required')">Full name is required.
+                </small>
+                <small class="p-error" *ngIf="formData.get('fullName')?.hasError('maxlength')">Full name cannot exceed
+                    150 characters.</small>
+            </div>
+
+            <div class="field col-12 md:col-12">
+                <label htmlFor="categoryName">Role</label>
+                <p-dropdown formControlName="roleId" [options]="roles" optionLabel="roleName"
+                    optionValue="roleId"></p-dropdown>
+            </div>
+
+            <div class="field col-12 md:col-12">
+                <label htmlFor="email">Email</label>
+                <input pInputText id="email" formControlName="email" type="text" />
+                <small class="p-error" *ngIf="formData.get('email')?.hasError('required')">Email is required. </small>
+                <small class="p-error" *ngIf="formData.get('email')?.hasError('maxlength')">Email cannot exceed 150
+                    characters.</small>
+            </div>
+
+            <div class="field col-12 md:col-12 p-fluid">
+                <label htmlFor="password">Password</label>
+
+                <p-password formControlName="password" [toggleMask]="true"></p-password>
+                <small class="p-error" *ngIf="formData.get('password')?.hasError('required')">Password is
+                    required.</small>
+                <small class="p-error"
+                    *ngIf="formData.get('password')?.hasError('maxlength') && !formData.get('password')?.hasError('required')">Password
+                    must be between 8 and 20 characters</small>
+                <small class="p-error"
+                    *ngIf="formData.get('password')?.hasError('minlength') && !formData.get('password')?.hasError('required') && !formData.get('password')?.hasError('maxlength')">Password
+                    must be between 8 and 20 characters</small>
+                <small class="p-error"
+                    *ngIf="formData.get('password')?.hasError('pattern') && !formData.get('password')?.hasError('required') && !formData.get('password')?.hasError('maxlength') && !formData.get('password')?.hasError('minlength')">Password
+                    must contain at least one uppercase letter, one lowercase letter, one number and one special
+                    character.</small>
+            </div>
+
+
+
+
+        </div>
+    </form>
+</p-card>

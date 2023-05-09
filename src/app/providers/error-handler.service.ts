@@ -12,7 +12,7 @@ export class ErrorHandlerService {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
       // client
-      errorMessage = `Error: ${error.error.message}`;
+      errorMessage = `${error.error.message}`;
     } else {
       // server
       // if (error.status == 401) {
@@ -24,8 +24,10 @@ export class ErrorHandlerService {
       //   errorMessage = `You didn't have permission to`;
       // }
       // else {
-      errorMessage = `Error Code: ${error.message} `;
+      errorMessage = `${error.error.message} `;
+      debugger
     }
+    debugger
     console.error(errorMessage);
     alert(errorMessage);
     return throwError(errorMessage);

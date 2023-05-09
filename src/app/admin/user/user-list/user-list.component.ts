@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user/user.service';
 import { LazyLoadEvent } from 'primeng/api';
+import { DialogService } from 'primeng/dynamicdialog';
+import { UserCreateComponent } from '../user-create/user-create.component';
 
 @Component({
   selector: 'app-user-list',
@@ -13,7 +15,7 @@ export class UserListComponent implements OnInit {
   rows: number = 5;
   totalRecords: number = 0;
 
-  constructor(private userSerivce: UserService){}
+  constructor(private userSerivce: UserService, private dialogService: DialogService){}
 
   ngOnInit(): void {
     this.load();
@@ -30,14 +32,20 @@ export class UserListComponent implements OnInit {
     this.userSerivce.getAll(this.page,this.rows).subscribe(
       response => {
         this.users = response.data.users;
-        console.log(this.users);
         this.totalRecords = response.data.totalRecords;
       }
     )
   }
 
   createShow(){
+    const ref = this.dialogService.open(UserCreateComponent, {
+      width: '20%',
+      contentStyle: { overflow: 'auto' },
+      baseZIndex: 10000
+    });
 
+    ref.onClose.subscribe(() => this.load());
+  
   }
 
   updateShow(user: any){
