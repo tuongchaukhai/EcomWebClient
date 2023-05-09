@@ -11,9 +11,8 @@ export interface IAuthService {
     
     get token(): string | null;
 
-    get userToken(): UserTokenInfo | null;
+    get userToken(): any | null;
 
-    isExpired(): boolean;
-
+    isLoggedIn(): boolean;
 
 }

@@ -3,13 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
 import { LoginComponent } from './auth/login/login.component';
 import { StaffLoginComponent } from './auth/staff-login/staff-login.component';
+import { AuthGuard } from './admin/guards/auth.guard';
 
 const routes: Routes = [
   {
-    path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
+    path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule), canActivate: [AuthGuard], data: { roles: ['Admin', 'staff'] }
   },
   { path: 'login', component: LoginComponent },
-  {path: 'admin/login', component: StaffLoginComponent},
+  {path: 'stafflogin', component: StaffLoginComponent},
   { path: '**', component: PageNotFoundComponent }
 
 ];

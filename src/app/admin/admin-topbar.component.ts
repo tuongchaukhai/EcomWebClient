@@ -12,17 +12,17 @@ import { UserTokenInfo } from '../auth/dto/user-token-info.dto';
           <img src="https://primefaces.org/cdn/primeng/images/primeng.svg" height="40" class="mr-2" />
       </ng-template>
       <ng-template pTemplate="end">
-          <p-splitButton label="Hello, {{name}}" [model]="this.items" styleClass="p-button-text mr-2 mb-2"></p-splitButton>
+          <p-splitButton label="Hello, {{name$}}" [model]="this.items" styleClass="p-button-text mr-2 mb-2"></p-splitButton>
       </ng-template>
   </p-menubar>
 </div>`
 })
 export class AdminTopbarComponent implements OnInit {
   items: MenuItem[] = [];
-  name: any;
+  name$: any;
 
   constructor(private authService: AuthService) {
-    this.name = this.authService.userToken?.FullName;
+    this.name$ = this.authService.userTokenSubject.getValue().FullName;
   }
 
   ngOnInit(): void {
@@ -37,10 +37,12 @@ export class AdminTopbarComponent implements OnInit {
       {
         label: 'Logout',
         icon: 'pi pi-sign-out',
-        // command: () => {
-        //     this.delete();
-        // }
+        command: () => this.authService.logOut()
       }
     ]
+  }
+
+  userLogout(): void {
+    this.authService.logOut();
   }
 }
