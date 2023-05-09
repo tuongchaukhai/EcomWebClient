@@ -6,6 +6,7 @@ import { LoginDto } from '../dto/login.dto';
 import { ErrorHandlerService } from 'src/app/providers/error-handler.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { UserTokenInfo } from '../dto/user-token-info.dto';
+import jwt_decode from 'jwt-decode'; //npm install jwt-decode
 
 
 @Injectable({
@@ -13,40 +14,63 @@ import { UserTokenInfo } from '../dto/user-token-info.dto';
 })
 export class AuthService implements IAuthService {
   private url = 'https://localhost:7209/api/Auth';
-  private userTokenSubject = new BehaviorSubject<UserTokenInfo | null>(null);
-  public userToken: Observable<UserTokenInfo | null> = this.userTokenSubject.asObservable();
+  // private userTokenSubject = new BehaviorSubject<UserTokenInfo | null>(null);
+  // public userToken: Observable<UserTokenInfo | null> = this.userTokenSubject.asObservable();
+  private readonly TOKEN_KEY = 'token';
 
   constructor(private http: HttpClient, private errorHandler: ErrorHandlerService) { }
-  logOut(): void {
-    throw new Error('Method not implemented.');
-  }
-  getToken(): string | null {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      return null;
-    } else {
-      return token;
-    }
+
+  get token(): string | null {
+    return localStorage.getItem(this.TOKEN_KEY);
   }
 
-  isExpired(): Observable<boolean> {
-    return this.userToken.pipe(
-      map(token => {
-        const currentTimeUTC = Date.now() + new Date().getTimezoneOffset() * 60000;
-        if (!token || token?.exp * 1000 < currentTimeUTC) {
-          return true;
-        }
-        return false;
-      })
-    );
+  get userToken(): any {
+    const token = this.token;
+    if (token) {
+      return jwt_decode(token);
+    }
+    return null;
   }
+
+  logOut(): void {
+    localStorage.removeItem('token');
+  }
+
+
+  // isExpired(): Observable<boolean> {
+  //   return this.userToken.pipe(
+  //     map(token => {
+  //       const currentTimeUTC = Date.now() + new Date().getTimezoneOffset() * 60000;
+  //       if (!token || token?.exp * 1000 < currentTimeUTC) {
+  //         return true;
+  //       }
+  //       return false;
+  //     })
+  //   );
+  // }
+
+
+  isExpired(): boolean {
+    const userToken = this.userToken;
+    if (!userToken) {
+      return true;
+    }
+    const currentTimeUTC = Date.now() + new Date().getTimezoneOffset() * 60000;
+    if (userToken.exp * 1000 < currentTimeUTC) {
+      return true;
+    }
+    return false;
+  }
+
+  // isLoggedIn() : Observable<boolean> {
+  //   return 
+  // }
 
   staffLogin(request: LoginDto): Observable<any> {
     return this.http.post<any>(`${this.url}`, request).pipe(
       map(response => {
-        debugger
         this.setToken(response.data)
-        return {success: true, message: response.message };
+        return { success: true, message: response.message };
       }),
       catchError(error => this.errorHandler.handleError(error))
     );
@@ -59,22 +83,8 @@ export class AuthService implements IAuthService {
     }
     else {
       localStorage.setItem('token', token);
-      const helper = new JwtHelperService();
-      const decoded = helper.decodeToken(token)
-      const userTokenInfo: UserTokenInfo = {
-        email: decoded.email,
-        role: decoded.role,
-        exp: decoded.exp,
-      };
-
-      this.userTokenSubject.next(userTokenInfo);
-      console.log(this.userTokenSubject)
-      console.log(userTokenInfo)
     }
   }
 
-
-
-
-
 }
+

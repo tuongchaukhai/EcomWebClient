@@ -1,5 +1,6 @@
 import { Observable } from "rxjs";
 import { LoginDto } from "../dto/login.dto";
+import { UserTokenInfo } from "../dto/user-token-info.dto";
 
 export interface IAuthService {
     staffLogin(request: LoginDto): Observable<any>;
@@ -8,9 +9,11 @@ export interface IAuthService {
 
     setToken(token: string): void;
     
-    getToken(): string | null;
+    get token(): string | null;
 
-    isExpired(): Observable<boolean>;
+    get userToken(): UserTokenInfo | null;
+
+    isExpired(): boolean;
 
 
 }
