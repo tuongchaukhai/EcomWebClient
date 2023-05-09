@@ -6,13 +6,13 @@ export interface IAuthService {
     staffLogin(request: LoginDto): Observable<any>;
 
     logOut(): void;
-
-    setToken(token: string): void;
     
-    get token(): string | null;
-
-    get userToken(): any | null;
-
     isLoggedIn(): boolean;
+    
+    // get token(): string | null;
+
+    // get userToken(): any | null;
+
+
 
 }

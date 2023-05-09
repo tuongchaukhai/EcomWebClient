@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthService implements IAuthService {
   private url = 'https://localhost:7209/api/Auth';
   // private userTokenSubject = new BehaviorSubject<UserTokenInfo | null>(null);
   // public userToken: Observable<UserTokenInfo | null> = this.userTokenSubject.asObservable();
