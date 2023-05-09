@@ -12,7 +12,7 @@ import { UserTokenInfo } from '../dto/user-token-info.dto';
   providedIn: 'root'
 })
 export class AuthService implements IAuthService {
-  private url = 'http://localhost:7209/api/users';
+  private url = 'https://localhost:7209/api/Auth';
   private userTokenSubject = new BehaviorSubject<UserTokenInfo | null>(null);
   public userToken: Observable<UserTokenInfo | null> = this.userTokenSubject.asObservable();
 
@@ -43,7 +43,11 @@ export class AuthService implements IAuthService {
 
   staffLogin(request: LoginDto): Observable<any> {
     return this.http.post<any>(`${this.url}`, request).pipe(
-      map(response => this.setToken(response.data.token)),
+      map(response => {
+        debugger
+        this.setToken(response.data)
+        return {success: true, message: response.message };
+      }),
       catchError(error => this.errorHandler.handleError(error))
     );
   }
@@ -62,7 +66,10 @@ export class AuthService implements IAuthService {
         role: decoded.role,
         exp: decoded.exp,
       };
+
       this.userTokenSubject.next(userTokenInfo);
+      console.log(this.userTokenSubject)
+      console.log(userTokenInfo)
     }
   }
 
