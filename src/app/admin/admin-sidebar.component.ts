@@ -29,6 +29,7 @@ export class AdminSidebarComponent implements OnInit {
           {
             label: 'List',
             icon: 'pi pi-list',
+            command: () => this.router.navigate(['/admin/employee']),
           },
         ]
       },

@@ -7,18 +7,22 @@ import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { AdminModule } from './admin/admin.module';
-import { SharedModule } from 'primeng/api';
+import { SharedModule } from './shared/shared.module';
+import { LoginComponent } from './auth/login/login.component';
+import { StaffLoginComponent } from './auth/staff-login/staff-login.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    ReusableTableComponent
+    ReusableTableComponent,
+    LoginComponent,
+    StaffLoginComponent
   ],
   imports: [
-    SharedModule,
     BrowserAnimationsModule,
     BrowserModule,
+    SharedModule,
     CommonModule,
     AppRoutingModule,
     AdminModule

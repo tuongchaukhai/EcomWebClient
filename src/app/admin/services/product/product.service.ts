@@ -16,9 +16,10 @@ export class ProductService {
   private url = 'https://localhost:7209/api/product';
 
   getAll(page?: number, rows?: number): Observable<any> {
-    return this.http.get<any>(`${this.url}?page=${page}&pageSize=${rows}`).pipe(
-      // catchError(error => this.errorHandler.handleError(error))
-    );
+    return this.http.get<any>(`${this.url}?page=${page}&pageSize=${rows}`)
+    // .pipe(
+    //   catchError(error => this.errorHandler.handleError(error))
+    // );
   }
 
   update(product: ProductUpdateDto): Observable<any> {

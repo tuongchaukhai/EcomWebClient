@@ -5,6 +5,7 @@ import { ProductDetailComponent } from './product/product-detail/product-detail.
 import { AdminComponent } from './admin.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PageNotFoundComponent } from '../shared/page-not-found/page-not-found.component';
+import { UserListComponent } from './user/user-list/user-list.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,11 @@ const routes: Routes = [
       { 
         path: 'product/:id',
         component: ProductDetailComponent
+      },
+
+      {
+        path: 'employee',
+        component: UserListComponent
       },
     ]
   }

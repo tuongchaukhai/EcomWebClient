@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 import { ProductUpdateComponent } from './product/product-update/product-update.component';
 import { ProductCreateComponent } from './product/product-create/product-create.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { UserListComponent } from './user/user-list/user-list.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     ProductUpdateComponent,
     ProductCreateComponent,
     DashboardComponent,
+    UserListComponent,
   ],
   imports: [
     CommonModule,

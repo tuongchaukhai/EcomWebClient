@@ -20,6 +20,9 @@ import { DividerModule } from 'primeng/divider';
 import { PanelModule } from 'primeng/panel';
 import { DialogModule } from 'primeng/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { RippleModule } from 'primeng/ripple';
+import { CheckboxModule } from 'primeng/checkbox';
 
 @NgModule({
     imports: [
@@ -46,10 +49,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         PanelModule,
         DialogModule,
         ReactiveFormsModule,
-        FormsModule 
+        FormsModule ,
+        RippleModule,
+        CheckboxModule
     ],
     providers: [
         DialogService
+    ],
+    declarations: [
+      PageNotFoundComponent
     ]
 })
 
