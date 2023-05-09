@@ -27,7 +27,15 @@ export class UserService implements IUserService {
   edit(): Observable<any> {
     throw new Error('Method not implemented.');
   }
-  delete(): Observable<any> {
-    throw new Error('Method not implemented.');
+  
+  delete(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.url}?id=${id}`).pipe(
+      map(response => {
+        debugger
+        return { success: true, message: response.message }
+      }),
+      catchError(error => this.errorHandler.handleError(error)
+      )
+    );
   }
 }

@@ -31,8 +31,13 @@ export class ProductService {
     );
   }
 
-  delete(productId: number | any): Observable<any> {
-    return this.http.delete<any>(`${this.url}?=id=${productId}`).pipe(
+  delete(productId: number): Observable<any> {
+    debugger
+    return this.http.delete<any>(`${this.url}?id=${productId}`).pipe(
+      map(response => {
+  
+        return {sccuess: true, message: response.message }
+      }),
       catchError(error => this.errorHandler.handleError(error))
     );
   }

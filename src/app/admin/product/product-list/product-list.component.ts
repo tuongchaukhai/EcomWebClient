@@ -61,11 +61,11 @@ export class ProductListComponent implements OnInit {
   }
 
   deleteProduct(product: any): void {
-
     this.productService.delete(product.productId).subscribe(
       response => {
-
-        alert(response);
+        this.visibleDeleteDialog = false;
+        this.load();
+        alert(response.message);
       },
       err => err
     );

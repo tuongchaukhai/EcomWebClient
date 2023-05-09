@@ -8,7 +8,7 @@ export interface IUserService {
 
     edit(): Observable<any>;
 
-    delete(): Observable<any>;
+    delete(id: number): Observable<any>;
 
     
 

@@ -14,8 +14,9 @@ export class UserListComponent implements OnInit {
   page: number = 1;
   rows: number = 5;
   totalRecords: number = 0;
-
-  constructor(private userSerivce: UserService, private dialogService: DialogService){}
+  visibleDeleteDialog: boolean = false;
+  selectedUser: any;
+  constructor(private userSerivce: UserService, private dialogService: DialogService) { }
 
   ngOnInit(): void {
     this.load();
@@ -28,8 +29,8 @@ export class UserListComponent implements OnInit {
     });
   }
 
-  load() : void{
-    this.userSerivce.getAll(this.page,this.rows).subscribe(
+  load(): void {
+    this.userSerivce.getAll(this.page, this.rows).subscribe(
       response => {
         this.users = response.data.users;
         this.totalRecords = response.data.totalRecords;
@@ -37,7 +38,7 @@ export class UserListComponent implements OnInit {
     )
   }
 
-  createShow(){
+  createShow() {
     const ref = this.dialogService.open(UserCreateComponent, {
       width: '20%',
       contentStyle: { overflow: 'auto' },
@@ -45,14 +46,25 @@ export class UserListComponent implements OnInit {
     });
 
     ref.onClose.subscribe(() => this.load());
-  
-  }
-
-  updateShow(user: any){
 
   }
 
-  deleteShow(user: any){
+  updateShow(user: any) {
 
+  }
+
+  deleteShow(user: any) {
+    this.visibleDeleteDialog = true;
+    this.selectedUser = user;
+  }
+
+  deleteUser(user: any) {
+    this.visibleDeleteDialog = false;
+    this.userSerivce.delete(user.userId).subscribe(response => {
+      if (response) {
+        alert(response.message);
+        this.load();
+      }
+    });
   }
 }
