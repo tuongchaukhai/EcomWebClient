@@ -25,7 +25,7 @@ export class ProductService {
   update(product: ProductUpdateDto): Observable<any> {
     return this.http.put<any>(`${this.url}`, product).pipe(
       map(response => {
-        return response.message
+        return {sccuess: true, message: response.message }
       }),
       catchError(error => this.errorHandler.handleError(error))
     );
@@ -45,7 +45,7 @@ export class ProductService {
   create(product: ProductAddDto) : Observable<any> {
     return this.http.post<any>(`${this.url}`, product).pipe(
       map(response => {
-        return response.message
+        return {sccuess: true, message: response.message }
       }),
       catchError(error => this.errorHandler.handleError(error))
     );

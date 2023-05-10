@@ -4,6 +4,7 @@ import { LazyLoadEvent } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { UserCreateComponent } from '../user-create/user-create.component';
 import { UserUpdateComponent } from '../user-update/user-update.component';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-user-list',
@@ -17,7 +18,7 @@ export class UserListComponent implements OnInit {
   totalRecords: number = 0;
   visibleDeleteDialog: boolean = false;
   selectedUser: any;
-  constructor(private userSerivce: UserService, private dialogService: DialogService) { }
+  constructor(private toastService: ToastService, private userSerivce: UserService, private dialogService: DialogService) { }
 
   ngOnInit(): void {
     this.load();
@@ -70,7 +71,7 @@ export class UserListComponent implements OnInit {
     this.visibleDeleteDialog = false;
     this.userSerivce.delete(user.userId).subscribe(response => {
       if (response) {
-        alert(response.message);
+        this.toastService.showSuccess(response.message);
         this.load();
       }
     });

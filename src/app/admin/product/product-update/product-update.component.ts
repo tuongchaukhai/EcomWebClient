@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CategoryService } from '../../services/category/category.service';
 import { ProductService } from '../../services/product/product.service';
+import { ToastService } from 'src/app/services/toast.service';
 
 
 @Component({
@@ -15,7 +16,7 @@ export class ProductUpdateComponent implements OnInit {
   formData: FormGroup;
   categories: any[] = [];
 
-  constructor(private fb: FormBuilder, public config: DynamicDialogConfig, private categoryService: CategoryService, private ref: DynamicDialogRef, private productService: ProductService) {
+  constructor(private toastService: ToastService, private fb: FormBuilder, public config: DynamicDialogConfig, private categoryService: CategoryService, private ref: DynamicDialogRef, private productService: ProductService) {
     this.formData = this.fb.group({
       productId: [this.config.data.product.productId],
       productName: [this.config.data.product.productName, [Validators.required, Validators.maxLength(255)]],
@@ -50,7 +51,7 @@ export class ProductUpdateComponent implements OnInit {
     
     this.productService.update(this.formData.value).subscribe(
       response => {
-        alert(response);
+        this.toastService.showSuccess(response.message);
         this.ref.close();
       },
       err => err

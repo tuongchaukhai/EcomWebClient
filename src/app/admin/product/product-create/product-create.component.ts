@@ -4,6 +4,7 @@ import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ProductService } from '../../services/product/product.service';
 import { CategoryService } from '../../services/category/category.service';
 import { ProductAddDto } from '../dto/product-add.dto';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-product-create',
@@ -31,7 +32,7 @@ export class ProductCreateComponent {
   });
   categories: any[] = [];
 
-  constructor(private fb: FormBuilder, private ref: DynamicDialogRef, private productService: ProductService, private categoryService: CategoryService) {
+  constructor(private toastService: ToastService, private fb: FormBuilder, private ref: DynamicDialogRef, private productService: ProductService, private categoryService: CategoryService) {
     this.categoryService.getAll().subscribe(response => this.categories = response.data);
   }
 
@@ -56,7 +57,7 @@ export class ProductCreateComponent {
     }
     this.productService.create(product).subscribe(
       response => {
-        alert(response);
+        this.toastService.showSuccess(response.message);
         this.ref.close();
       },
       err => err

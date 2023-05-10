@@ -4,6 +4,7 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { RoleService } from '../../services/role/role.service';
 import { UserService } from '../../services/user/user.service';
 import { UserUpdateEdto } from '../dto/user-update.dto';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-user-update',
@@ -13,8 +14,7 @@ import { UserUpdateEdto } from '../dto/user-update.dto';
 export class UserUpdateComponent {
   formData: FormGroup = this.fb.group({});
   roles: any;
-  constructor(private fb: FormBuilder, private config: DynamicDialogConfig, private ref: DynamicDialogRef, private roleService: RoleService, private userService: UserService) {
-    debugger
+  constructor(private toastService: ToastService, private fb: FormBuilder, private config: DynamicDialogConfig, private ref: DynamicDialogRef, private roleService: RoleService, private userService: UserService) {
     this.formData = this.fb.group({
       userId: [this.config.data.user.userId],
       email: [this.config.data.user.email, [Validators.required, Validators.email, Validators.maxLength(150)]],
@@ -22,14 +22,13 @@ export class UserUpdateComponent {
       // password: ['', [Validators.required, Validators.maxLength(20), Validators.minLength(8), Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]+$')]],
       active: [this.config.data.user.active, [Validators.required]],
       roleId: [this.config.data.user.roleId, [Validators.required]]
-      
+
     });
 
     this.roleService.getAll().subscribe(response => this.roles = response.data)
   }
 
   submit(): void {
-
     const user: UserUpdateEdto = {
       userId: this.formData.value.userId,
       email: this.formData.value.email,
@@ -40,7 +39,7 @@ export class UserUpdateComponent {
     }
     this.userService.update(user).subscribe(
       response => {
-        alert(response.message);
+        this.toastService.showSuccess(response.message);
         this.ref.close();
       });
 

@@ -3,6 +3,7 @@ import { UserService } from '../../services/user/user.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RoleService } from '../../services/role/role.service';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-user-create',
@@ -20,7 +21,7 @@ export class UserCreateComponent {
 
   formInputValid = false;
   roles: [] = [];
-  constructor(private userService: UserService, private fb: FormBuilder, private roleService: RoleService, private ref: DynamicDialogRef) {
+  constructor(private toastService: ToastService, private userService: UserService, private fb: FormBuilder, private roleService: RoleService, private ref: DynamicDialogRef) {
 
     this.roleService.getAll().subscribe(response => {
       this.roles = response.data;
@@ -32,7 +33,7 @@ export class UserCreateComponent {
     if (this.formData.valid)
       this.userService.create(this.formData.value).subscribe(response => {
         if (response.success) {
-          alert(response.message);
+          this.toastService.showSuccess(response.message);
           this.ref.close();
         }
       })

@@ -24,6 +24,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { RippleModule } from 'primeng/ripple';
 import { CheckboxModule } from 'primeng/checkbox';
 import { PasswordModule } from 'primeng/password';
+import { MessageService } from 'primeng/api';
+import { ToastService } from '../services/toast.service';
 
 @NgModule({
     imports: [
@@ -56,7 +58,9 @@ import { PasswordModule } from 'primeng/password';
         PasswordModule
     ],
     providers: [
-        DialogService
+        DialogService,
+        MessageService,
+        ToastService
     ],
     declarations: [
       PageNotFoundComponent

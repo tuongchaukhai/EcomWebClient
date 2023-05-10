@@ -7,6 +7,7 @@ import { ProductResultDto } from '../dto/product-result.dto';
 import { ProductCreateComponent } from '../product-create/product-create.component';
 import { LazyLoadEvent } from 'primeng/api';
 import { disableDebugTools } from '@angular/platform-browser';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-product-list',
@@ -22,7 +23,7 @@ export class ProductListComponent implements OnInit {
   layout: string = 'list';
   totalRecords: number = 0;
 
-  constructor(private dialogService: DialogService, private productService: ProductService) { }
+  constructor(private toastService: ToastService, private dialogService: DialogService, private productService: ProductService) { }
 
   ngOnInit(): void {
     this.load();
@@ -61,11 +62,11 @@ export class ProductListComponent implements OnInit {
   }
 
   deleteProduct(product: any): void {
+    this.visibleDeleteDialog = false;
     this.productService.delete(product.productId).subscribe(
       response => {
-        this.visibleDeleteDialog = false;
+        this.toastService.showSuccess(response.message);
         this.load();
-        alert(response.message);
       },
       err => err
     );
