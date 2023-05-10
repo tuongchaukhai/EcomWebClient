@@ -26,6 +26,9 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { PasswordModule } from 'primeng/password';
 import { MessageService } from 'primeng/api';
 import { ToastService } from '../services/toast.service';
+import { BadgeModule } from 'primeng/badge';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { LoggingService } from '../services/logging.service';
 
 @NgModule({
     imports: [
@@ -55,12 +58,15 @@ import { ToastService } from '../services/toast.service';
         FormsModule ,
         RippleModule,
         CheckboxModule,
-        PasswordModule
+        PasswordModule,
+        BadgeModule,
+        OverlayPanelModule
     ],
     providers: [
         DialogService,
         MessageService,
-        ToastService
+        ToastService,
+        LoggingService
     ],
     declarations: [
       PageNotFoundComponent

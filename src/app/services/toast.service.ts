@@ -6,22 +6,50 @@ import { MessageService } from 'primeng/api';
 })
 export class ToastService {
 
-  constructor(private messageService: MessageService) { debugger}
+  private toastMessages: Array<any> = [];
+  constructor(private messageService: MessageService) {
+
+    const messages = JSON.parse(localStorage.getItem('toastMessages')!);
+    if (messages) {
+      this.toastMessages = messages;
+    }
+  }
 
   showSuccess(message: string, title = 'success') {
+    const toast = { severity: 'success', summary: title, detail: message, timestamp: new Date().toISOString() }
+    this.messageService.add(toast);
+    this.toastMessages.push(toast);
     
-    this.messageService.add({ severity: 'success', summary: title, detail: message });
+    localStorage.setItem('toastMessages', JSON.stringify(this.toastMessages))
   }
 
   showInfo(message: string, title = 'info') {
-    this.messageService.add({ severity: 'info', summary: title, detail: message });
+    const toast = { severity: 'info', summary: title, detail: message, timestamp: new Date().toISOString()  }
+    this.messageService.add(toast);
+    this.toastMessages.push(toast);
+    localStorage.setItem('toastMessages', JSON.stringify(this.toastMessages))
   }
 
   showWarn(message: string, title = 'warm') {
-    this.messageService.add({ severity: 'warn', summary: title, detail: message });
+    const toast = { severity: 'warn', summary: title, detail: message, timestamp: new Date().toISOString()  };
+    this.messageService.add(toast);
+    this.toastMessages.push(toast);
+    localStorage.setItem('toastMessages', JSON.stringify(this.toastMessages))
   }
 
   showError(message: string, title = 'error') {
-    this.messageService.add({ severity: 'error', summary: title, detail: message });
+    const toast = { severity: 'error', summary: title, detail: message, timestamp: new Date().toISOString()  };
+    this.messageService.add(toast);
+    this.toastMessages.push(toast);
+    localStorage.setItem('toastMessages', JSON.stringify(this.toastMessages))
   }
-}
+
+  getToastMessages() {
+    return this.toastMessages;
+  }
+
+  clearToastMessages() {
+    this.toastMessages = [];
+    localStorage.removeItem('toastMessages');
+  }
+} 
