@@ -16,9 +16,10 @@ export class UserUpdateComponent {
   constructor(private fb: FormBuilder, private config: DynamicDialogConfig, private ref: DynamicDialogRef, private roleService: RoleService, private userService: UserService) {
     debugger
     this.formData = this.fb.group({
+      userId: [this.config.data.user.userId],
       email: [this.config.data.user.email, [Validators.required, Validators.email, Validators.maxLength(150)]],
       fullName: [this.config.data.user.fullName, [Validators.required, Validators.maxLength(150)]],
-      password: [this.config.data.user.password, [Validators.required, Validators.maxLength(20), Validators.minLength(8), Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]+$')]],
+      // password: ['', [Validators.required, Validators.maxLength(20), Validators.minLength(8), Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]+$')]],
       active: [this.config.data.user.active, [Validators.required]],
       roleId: [this.config.data.user.roleId, [Validators.required]]
       
@@ -30,9 +31,10 @@ export class UserUpdateComponent {
   submit(): void {
 
     const user: UserUpdateEdto = {
+      userId: this.formData.value.userId,
       email: this.formData.value.email,
       fullName: this.formData.value.fullName,
-      password: this.formData.value.password,
+      // password: this.formData.value.password,
       active: this.formData.value.active,
       roleId: this.formData.value.roleId
     }
