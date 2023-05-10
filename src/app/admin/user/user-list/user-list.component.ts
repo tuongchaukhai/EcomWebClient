@@ -3,6 +3,7 @@ import { UserService } from '../../services/user/user.service';
 import { LazyLoadEvent } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { UserCreateComponent } from '../user-create/user-create.component';
+import { UserUpdateComponent } from '../user-update/user-update.component';
 
 @Component({
   selector: 'app-user-list',
@@ -50,7 +51,14 @@ export class UserListComponent implements OnInit {
   }
 
   updateShow(user: any) {
+    const ref = this.dialogService.open(UserUpdateComponent, {
+      width: '50%',
+      contentStyle: { overflow: 'auto' },
+      baseZIndex: 10000,
+      data: { user }
+    });
 
+    ref.onClose.subscribe(() => this.load());
   }
 
   deleteShow(user: any) {
@@ -67,4 +75,5 @@ export class UserListComponent implements OnInit {
       }
     });
   }
+
 }

@@ -15,6 +15,7 @@ import { ProductCreateComponent } from './product/product-create/product-create.
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserListComponent } from './user/user-list/user-list.component';
 import { UserCreateComponent } from './user/user-create/user-create.component';
+import { UserUpdateComponent } from './user/user-update/user-update.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { UserCreateComponent } from './user/user-create/user-create.component';
     DashboardComponent,
     UserListComponent,
     UserCreateComponent,
+    UserUpdateComponent,
   ],
   imports: [
     CommonModule,
