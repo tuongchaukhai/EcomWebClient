@@ -51,7 +51,7 @@
 
 
 <p-dialog header="Product delete" [(visible)]="visibleDeleteDialog" [modal]="true" [style]="{ width: '30vw' }">
-    <p>Are you sure delete <span style="color: red;">"{{selectedProduct?.productName}}"</span> book?</p>
+    <p>Are you sure delete <span style="color: red;">"{{selectedProduct?.productName}}"</span> product?</p>
     <ng-template pTemplate="footer">
         <p-button icon="pi pi-check" label="YES" (click)="deleteProduct(selectedProduct)"
             styleClass="p-button-text"></p-button>

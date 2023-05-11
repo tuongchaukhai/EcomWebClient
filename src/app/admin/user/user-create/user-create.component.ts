@@ -19,7 +19,7 @@ export class UserCreateComponent {
     roleId: [0, [Validators.required]]
   });
 
-  formInputValid = false;
+  
   roles: [] = [];
   constructor(private toastService: ToastService, private userService: UserService, private fb: FormBuilder, private roleService: RoleService, private ref: DynamicDialogRef) {
 

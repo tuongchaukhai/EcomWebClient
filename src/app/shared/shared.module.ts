@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
@@ -29,12 +29,14 @@ import { ToastService } from '../services/toast.service';
 import { BadgeModule } from 'primeng/badge';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { LoggingService } from '../services/logging.service';
+import { LoggingInterceptor } from '../interceptors/logging.interceptor';
+import { CalendarModule } from 'primeng/calendar';
 
 @NgModule({
     imports: [
 
-        ],
-    exports: [  
+    ],
+    exports: [
         HttpClientModule,
         TableModule,
         MenubarModule,
@@ -55,22 +57,29 @@ import { LoggingService } from '../services/logging.service';
         PanelModule,
         DialogModule,
         ReactiveFormsModule,
-        FormsModule ,
+        FormsModule,
         RippleModule,
         CheckboxModule,
         PasswordModule,
         BadgeModule,
-        OverlayPanelModule
+        OverlayPanelModule,
+        CalendarModule
     ],
     providers: [
         DialogService,
         MessageService,
         ToastService,
-        LoggingService
+        LoggingService,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: LoggingInterceptor,
+            multi: true,
+        },
+
     ],
     declarations: [
-      PageNotFoundComponent
+        PageNotFoundComponent
     ]
 })
 
-export class SharedModule {}
+export class SharedModule { }

@@ -16,6 +16,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserListComponent } from './user/user-list/user-list.component';
 import { UserCreateComponent } from './user/user-create/user-create.component';
 import { UserUpdateComponent } from './user/user-update/user-update.component';
+import { CustomerListComponent } from './customer/customer-list/customer-list.component';
+import { CustomerUpdateComponent } from './customer/customer-update/customer-update.component';
+import { CustomerCreateComponent } from './customer/customer-create/customer-create.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +33,9 @@ import { UserUpdateComponent } from './user/user-update/user-update.component';
     UserListComponent,
     UserCreateComponent,
     UserUpdateComponent,
+    CustomerListComponent,
+    CustomerUpdateComponent,
+    CustomerCreateComponent,
   ],
   imports: [
     CommonModule,
