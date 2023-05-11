@@ -31,6 +31,7 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { LoggingService } from '../services/logging.service';
 import { LoggingInterceptor } from '../interceptors/logging.interceptor';
 import { CalendarModule } from 'primeng/calendar';
+import { FileUploadModule } from 'primeng/fileupload';
 
 @NgModule({
     imports: [
@@ -63,7 +64,8 @@ import { CalendarModule } from 'primeng/calendar';
         PasswordModule,
         BadgeModule,
         OverlayPanelModule,
-        CalendarModule
+        CalendarModule,
+        FileUploadModule
     ],
     providers: [
         DialogService,

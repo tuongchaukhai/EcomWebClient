@@ -5,6 +5,8 @@
         <div class="flex align-items-center justify-content-between">
             <div>
                 <p>Product Management</p>
+                <input type="file" (change)="onFileSelected($event)">
+                <button (click)="uploadFile()">Upload</button>
             </div>
             <div class="flex">
                 <p-button label="Create" icon="pi pi-plus" (onClick)="createShow()"></p-button>

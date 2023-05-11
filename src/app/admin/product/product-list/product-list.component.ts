@@ -22,6 +22,7 @@ export class ProductListComponent implements OnInit {
   public rows: number = 5;
   layout: string = 'list';
   totalRecords: number = 0;
+  selectedFile: File | null | undefined;
 
   constructor(private toastService: ToastService, private dialogService: DialogService, private productService: ProductService) { }
 
@@ -38,7 +39,7 @@ export class ProductListComponent implements OnInit {
 
 
   load(): void {
-    this.productService.getAll(this.page,this.rows).subscribe(
+    this.productService.getAll(this.page, this.rows).subscribe(
       response => { this.products = response.data.products; this.totalRecords = response.data.totalRecords; }
     );
   }
@@ -83,6 +84,33 @@ export class ProductListComponent implements OnInit {
 
       this.load();
     });
+  }
 
+  onFileSelected(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    const files = target.files;
+
+    if (files && files.length > 0) {
+      this.selectedFile = files.item(0);
+    }
+  }
+
+  uploadFile(): void {
+    if (this.selectedFile) {
+      const formData: FormData = new FormData();
+      formData.append('file', this.selectedFile);
+  
+  
+      this.productService.uploadFile(formData).subscribe(
+        response => {
+          if (response.success) {
+            this.load();
+          }
+        },
+        error => {
+          // Handle error response
+        }
+      );
+    }
   }
 }

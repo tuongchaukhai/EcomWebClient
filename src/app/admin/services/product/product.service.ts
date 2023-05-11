@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, map } from 'rxjs';
 import { ErrorHandlerService } from 'src/app/providers/error-handler.service';
 import { ProductUpdateDto } from '../../product/dto/product-update.dto';
@@ -25,7 +25,7 @@ export class ProductService {
   update(product: ProductUpdateDto): Observable<any> {
     return this.http.put<any>(`${this.url}`, product).pipe(
       map(response => {
-        return {sccuess: true, message: response.message }
+        return { sccuess: true, message: response.message }
       }),
       catchError(error => this.errorHandler.handleError(error))
     );
@@ -35,17 +35,28 @@ export class ProductService {
     debugger
     return this.http.delete<any>(`${this.url}?id=${productId}`).pipe(
       map(response => {
-  
-        return {sccuess: true, message: response.message }
+
+        return { sccuess: true, message: response.message }
       }),
       catchError(error => this.errorHandler.handleError(error))
     );
   }
 
-  create(product: ProductAddDto) : Observable<any> {
+  create(product: ProductAddDto): Observable<any> {
     return this.http.post<any>(`${this.url}`, product).pipe(
       map(response => {
-        return {sccuess: true, message: response.message }
+        return { sccuess: true, message: response.message }
+      }),
+      catchError(error => this.errorHandler.handleError(error))
+    );
+  }
+
+  uploadFile(formData: FormData): Observable<any> {
+
+    console.log(formData.get('file'));
+    return this.http.post<any>(`${this.url}/upload`, formData).pipe(
+      map(response => {
+        return { success: true, message: response.message };
       }),
       catchError(error => this.errorHandler.handleError(error))
     );
