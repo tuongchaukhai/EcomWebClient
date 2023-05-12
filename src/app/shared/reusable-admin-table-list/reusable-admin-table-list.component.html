@@ -1,0 +1,60 @@
+<p-table [value]="models" class="table-width" [lazy]="true" [paginator]="true" [rows]="rows"
+    (onLazyLoad)="lazyLoad.emit($event)" [totalRecords]="totalRecords"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+    <ng-template pTemplate="caption">
+        <div class="flex align-items-center justify-content-between">
+            <div>
+                <p>{{title}} Management</p>
+            </div>
+            <div class="flex">
+
+                <p-splitButton label="Create" (onClick)="createShow()" icon="pi pi-plus"
+                    [model]="splitButtonMenu"></p-splitButton>
+
+                <div class="p-inputgroup" style="width: 300px; margin-left: 10px;">
+                    <input type="text" pInputText placeholder="Search" />
+                    <button pButton type="button" icon="pi pi-search" class="p-button-secondary"></button>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th *ngFor="let head of headArray">{{head.Head}}</th>
+            <th>#</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-model>
+        <tr>
+            <td *ngFor="let head of headArray">
+                <div *ngIf="head.Head == 'Image'; else falseReturn">
+                    <img [src]="'https://99designs-blog.imgix.net/blog/wp-content/uploads/2017/02/Anatomy_book_cover.png?auto=format&q=60&w=3300&h=1856.25&fit=crop&crop=faces'"
+                        width="100" class="shadow-4" />
+                </div>
+                <ng-template #falseReturn>
+                    {{ model[head.fieldName] }}
+                </ng-template>
+            </td>
+            <td>
+                <div class="flex button-action gap-3">
+                    <p-button label="Edit" icon="pi pi-pencil" styleClass="p-button-warning"
+                        (click)="updateShow(model)"></p-button>
+                    <p-button label="Remove" icon="pi pi-trash" styleClass="p-button-danger"
+                        (click)="deleteShow(model)"></p-button>
+                </div>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+
+<p-dialog header="{{title}} delete" [(visible)]="visibleDeleteDialog" [modal]="true" [style]="{ width: '30vw' }">
+    <!-- <p>Are you sure delete <span style="color: red;">"{{selectedModel?.productName}}"</span> product?</p> -->
+    <p>Are you sure delete <span style="color: red;"></span>?</p>
+
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" label="YES" (click)="deleteModel()" styleClass="p-button-text"></p-button>
+        <p-button icon="pi pi-check" label="NO" (click)="visibleDeleteDialog = false"
+            styleClass="p-button-text"></p-button>
+    </ng-template>
+</p-dialog>

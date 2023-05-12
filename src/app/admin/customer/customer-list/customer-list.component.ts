@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CustomerService } from '../../services/customer/customer.service';
-import { LazyLoadEvent } from 'primeng/api';
+import { LazyLoadEvent, MenuItem } from 'primeng/api';
 import { ProductUpdateComponent } from '../../product/product-update/product-update.component';
 import { DialogService } from 'primeng/dynamicdialog';
 import { ToastService } from 'src/app/services/toast.service';
@@ -20,6 +20,45 @@ export class CustomerListComponent {
   page: number = 1;
   visibleDeleteDialog: boolean = false;
   selectedCustomer: any;
+  selectedFile: File | null | undefined;
+
+  title: string = 'Customer';
+
+  headArray: any[] = [
+    { 'Head': 'ID', 'fieldName': 'customerId' },
+    { 'Head': 'Fullname', 'fieldName': 'fullName' },
+    { 'Head': 'Email', 'fieldName': 'email' },
+    { 'Head': 'Phone', 'fieldName': 'phone' },
+    { 'Head': 'Created Date', 'fieldName': 'createdDate' },
+    { 'Head': 'Last Login', 'fieldName': 'lastLogin' },
+    { 'Head': 'Active', 'fieldName': 'active' },
+  ];
+
+  splitButtonMenu: MenuItem[] = [
+    {
+      label: 'Import',
+      icon: 'pi pi-download',
+      command: () => {
+        const fileInput = document.createElement('input');
+        fileInput.type = 'file';
+        fileInput.accept = '.csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+        fileInput.addEventListener('change', (event: any) => {
+          this.onFileSelected(event);
+          this.uploadFile();
+        });
+        fileInput.click();
+      }
+    },
+    {
+      label: 'Export',
+      icon: 'pi pi-upload',
+      command: () => {
+        this.exportDataToCSV()
+      }
+    }
+  ];
+
+
   constructor(private customerService: CustomerService, private dialogService: DialogService, private toastService: ToastService) {
     this.load();
   }
@@ -46,7 +85,7 @@ export class CustomerListComponent {
     });
 
     ref.onClose.subscribe(() => {
-    this.load();
+      this.load();
     });
 
   }
@@ -77,5 +116,37 @@ export class CustomerListComponent {
       },
       err => err
     );
+  }
+
+  onFileSelected(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    const files = target.files;
+
+    if (files && files.length > 0) {
+      this.selectedFile = files.item(0);
+    }
+  }
+
+  uploadFile(): void {
+    if (this.selectedFile) {
+      const formData: FormData = new FormData();
+      formData.append('file', this.selectedFile);
+
+
+      this.customerService.uploadFile(formData).subscribe(
+        response => {
+          if (response.success) {
+            this.load();
+          }
+        },
+        error => {
+          // Handle error response
+        }
+      );
+    }
+  }
+
+  exportDataToCSV(): void {
+    this.customerService.exportDataToCSV();
   }
 }

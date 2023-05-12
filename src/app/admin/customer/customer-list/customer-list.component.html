@@ -1,4 +1,4 @@
-<p-table [value]="customers" class="table-width" [lazy]="true" (onLazyLoad)="loadLazy($event)" [paginator]="true"
+<!-- <p-table [value]="customers" class="table-width" [lazy]="true" (onLazyLoad)="loadLazy($event)" [paginator]="true"
     [rows]="rows" [totalRecords]="totalRecords"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
     <ng-template pTemplate="caption">
@@ -59,4 +59,9 @@
         <p-button icon="pi pi-check" label="NO" (click)="visibleDeleteDialog = false; selectedCustomer = undefined"
             styleClass="p-button-text"></p-button>
     </ng-template>
-</p-dialog>
+</p-dialog> -->
+
+
+<app-reusable-admin-table-list [title]="title" [rows]="rows" [totalRecords]="totalRecords" [headArray]="headArray"
+    [models]="customers" (lazyLoad)="loadLazy($event)" (create)="createShow()" (update)="updateShow($event)"
+    (delete)="deleteProduct($event)" [splitButtonMenu]="splitButtonMenu"></app-reusable-admin-table-list>

@@ -19,7 +19,8 @@ import { ToastService } from '../services/toast.service';
         <p-splitButton label="Hello, {{name$}}" [model]="this.items" styleClass="p-button-text mr-2 "></p-splitButton>
       </ng-template>
       <p-overlayPanel #op (onShow)="notiOnShow()" [style]="{width: '500px'}" >
-      <div class="card">
+      <div class="card" >
+
                 <div class="flex align-items-center justify-content-between mb-4">
                     <h5>Notifications</h5>
                     <div>
@@ -32,7 +33,8 @@ import { ToastService } from '../services/toast.service';
                         <span class="text-900 line-height-3">{{toast.timestamp | date}}: {{toast.detail}} </span>
                     </li>
                 </ul>
-            </div>
+       
+            </div>    
       </p-overlayPanel>
   </p-menubar>
 </div>`

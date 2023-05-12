@@ -1,15 +1,15 @@
-<p-table [value]="products" class="table-width" [lazy]="true" (onLazyLoad)="loadLazy($event)" [paginator]="true"
+<!-- <p-table [value]="products" class="table-width" [lazy]="true" (onLazyLoad)="loadLazy($event)" [paginator]="true"
     [rows]="rows" [totalRecords]="totalRecords"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
     <ng-template pTemplate="caption">
         <div class="flex align-items-center justify-content-between">
             <div>
                 <p>Product Management</p>
-                <input type="file" (change)="onFileSelected($event)">
-                <button (click)="uploadFile()">Upload</button>
             </div>
             <div class="flex">
-                <p-button label="Create" icon="pi pi-plus" (onClick)="createShow()"></p-button>
+
+                <p-splitButton label="Create" (onClick)="createShow()" icon="pi pi-plus" [model]="splitButtonMenu"></p-splitButton>
+
                 <div class="p-inputgroup" style="width: 300px; margin-left: 10px;">
                     <input type="text" pInputText placeholder="Search" />
                     <button pButton type="button" icon="pi pi-search" class="p-button-secondary"></button>
@@ -60,4 +60,8 @@
         <p-button icon="pi pi-check" label="NO" (click)="visibleDeleteDialog = false; selectedProduct = undefined"
             styleClass="p-button-text"></p-button>
     </ng-template>
-</p-dialog>
+</p-dialog> -->
+
+<app-reusable-admin-table-list [title]="title" [rows]="rows" [totalRecords]="totalRecords" [headArray]="headArray"
+    [models]="products" (lazyLoad)="loadLazy($event)" (create)="createShow()" (update)="updateShow($event)"
+    (delete)="deleteProduct($event)" [splitButtonMenu]="splitButtonMenu"></app-reusable-admin-table-list>

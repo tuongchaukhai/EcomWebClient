@@ -19,6 +19,7 @@ import { UserUpdateComponent } from './user/user-update/user-update.component';
 import { CustomerListComponent } from './customer/customer-list/customer-list.component';
 import { CustomerUpdateComponent } from './customer/customer-update/customer-update.component';
 import { CustomerCreateComponent } from './customer/customer-create/customer-create.component';
+import { ReusableAdminTableListComponent } from '../shared/reusable-admin-table-list/reusable-admin-table-list.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { CustomerCreateComponent } from './customer/customer-create/customer-cre
     CustomerListComponent,
     CustomerUpdateComponent,
     CustomerCreateComponent,
+    ReusableAdminTableListComponent
   ],
   imports: [
     CommonModule,

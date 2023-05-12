@@ -34,6 +34,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { FileUploadModule } from 'primeng/fileupload';
 import { MegaMenuModule } from 'primeng/megamenu';
 import { PanelMenuModule } from 'primeng/panelmenu';
+import { ReusableAdminTableListComponent } from './reusable-admin-table-list/reusable-admin-table-list.component';
 @NgModule({
     imports: [
   ],
@@ -82,7 +83,7 @@ import { PanelMenuModule } from 'primeng/panelmenu';
 
     ],
     declarations: [
-        PageNotFoundComponent
+        PageNotFoundComponent,
     ]
 })
 

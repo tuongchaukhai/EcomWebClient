@@ -3,10 +3,8 @@ import { ProductService } from '../../services/product/product.service';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ProductUpdateComponent } from '../product-update/product-update.component';
 import { ProductUpdateDto } from '../dto/product-update.dto';
-import { ProductResultDto } from '../dto/product-result.dto';
 import { ProductCreateComponent } from '../product-create/product-create.component';
-import { LazyLoadEvent } from 'primeng/api';
-import { disableDebugTools } from '@angular/platform-browser';
+import { LazyLoadEvent, MenuItem } from 'primeng/api';
 import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
@@ -18,13 +16,49 @@ export class ProductListComponent implements OnInit {
   products: any[] = [];
   visibleDeleteDialog: boolean = false;
   selectedProduct?: any;
-  public page: number = 1;
-  public rows: number = 5;
+  page: number = 1;
+  rows: number = 5;
   layout: string = 'list';
   totalRecords: number = 0;
   selectedFile: File | null | undefined;
+  splitButtonMenu: MenuItem[] = [];
+  title: string = 'Product';
 
-  constructor(private toastService: ToastService, private dialogService: DialogService, private productService: ProductService) { }
+  // headArray: string[] = ['productId', 'productName','thumb', 'price', 'unitInStock', 'categoryName'];
+  headArray: any[] = [
+    { 'Head': 'ID', 'fieldName': 'productId' },
+    { 'Head': 'Title', 'fieldName': 'productName' },
+    { 'Head': 'Image', 'fieldName': 'thumb' },
+    { 'Head': 'Price', 'fieldName': 'price' },
+    { 'Head': 'Quantity', 'fieldName': 'unitInStock' },
+    { 'Head': 'Category', 'fieldName': 'categoryName' },
+  ];
+
+  constructor(private toastService: ToastService, private dialogService: DialogService, private productService: ProductService) {
+    this.splitButtonMenu = [
+      {
+        label: 'Import',
+        icon: 'pi pi-download',
+        command: () => {
+          const fileInput = document.createElement('input');
+          fileInput.type = 'file';
+          fileInput.accept = '.csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+          fileInput.addEventListener('change', (event: any) => {
+            this.onFileSelected(event);
+            this.uploadFile();
+          });
+          fileInput.click();
+        }
+      },
+      {
+        label: 'Export',
+        icon: 'pi pi-upload',
+        command: () => {
+          this.exportDataToCSV()
+        }
+      }
+    ];
+  }
 
   ngOnInit(): void {
     this.load();
@@ -40,7 +74,7 @@ export class ProductListComponent implements OnInit {
 
   load(): void {
     this.productService.getAll(this.page, this.rows).subscribe(
-      response => { this.products = response.data.products; this.totalRecords = response.data.totalRecords; }
+      response => { this.products =  response.data.products; this.totalRecords = response.data.totalRecords; }
     );
   }
 
@@ -57,13 +91,14 @@ export class ProductListComponent implements OnInit {
 
   }
 
-  deleteShow(product: any): void {
-    this.visibleDeleteDialog = true;
-    this.selectedProduct = product;
-  }
+  // deleteShow(product: any): void {
+  //   this.selectedProduct = product;
+  //   // this.visibleDeleteDialog = true;
+
+  // }
 
   deleteProduct(product: any): void {
-    this.visibleDeleteDialog = false;
+    debugger
     this.productService.delete(product.productId).subscribe(
       response => {
         this.toastService.showSuccess(response.message);
@@ -99,8 +134,8 @@ export class ProductListComponent implements OnInit {
     if (this.selectedFile) {
       const formData: FormData = new FormData();
       formData.append('file', this.selectedFile);
-  
-  
+
+
       this.productService.uploadFile(formData).subscribe(
         response => {
           if (response.success) {
@@ -112,5 +147,9 @@ export class ProductListComponent implements OnInit {
         }
       );
     }
+  }
+
+  exportDataToCSV(): void {
+    this.productService.exportDataToCSV();
   }
 }
