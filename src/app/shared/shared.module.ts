@@ -32,11 +32,11 @@ import { LoggingService } from '../services/logging.service';
 import { LoggingInterceptor } from '../interceptors/logging.interceptor';
 import { CalendarModule } from 'primeng/calendar';
 import { FileUploadModule } from 'primeng/fileupload';
-
+import { MegaMenuModule } from 'primeng/megamenu';
+import { PanelMenuModule } from 'primeng/panelmenu';
 @NgModule({
     imports: [
-
-    ],
+  ],
     exports: [
         HttpClientModule,
         TableModule,
@@ -65,7 +65,9 @@ import { FileUploadModule } from 'primeng/fileupload';
         BadgeModule,
         OverlayPanelModule,
         CalendarModule,
-        FileUploadModule
+        FileUploadModule,
+        MegaMenuModule,
+        PanelMenuModule
     ],
     providers: [
         DialogService,

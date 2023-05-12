@@ -25,8 +25,29 @@ export class AuthService implements IAuthService {
     this.getToken();
   }
 
+  login(request: any): Observable<any> {
+    return this.http.post<any>(`${this.url}/CustomerLogin`, request).pipe(
+      map(response => {
+        this.setToken(response.data);
+        return { success: true, message: response.message };
+      }),
+      catchError(error => this.errorHandler.handleError(error))
+    );
+  }
+
   staffLogin(request: LoginDto): Observable<any> {
     return this.http.post<any>(`${this.url}`, request).pipe(
+      map(response => {
+        this.setToken(response.data);
+        return { success: true, message: response.message };
+      }),
+      catchError(error => this.errorHandler.handleError(error))
+    );
+  }
+
+
+  register(request: any): Observable<any>  {
+    return this.http.post<any>(`${this.url}/CustomerRegister`, request).pipe(
       map(response => {
         this.setToken(response.data);
         return { success: true, message: response.message };

@@ -1,0 +1,23 @@
+<p-menubar [model]="items">
+    <ng-template pTemplate="start">
+        <img src="https://www.pngfind.com/pngs/m/29-290389_e-commerce-website-logo-png-download-e-commerce.png"
+            height="40" class="mr-2 pr-7" />
+    </ng-template>
+    <ng-template pTemplate="end">
+        <div class="flex">
+            <span class="p-input-icon-left  mr-5">
+                <i class="pi pi-search"></i>
+                <input type="text" pInputText class="md:w-10rem lg:w-30rem" placeholder="search..." />
+            </span>
+            <div class="flex flex-wrap card-container blue-container gap-3 mr-5">
+                <p-menu #userMenu [model]="loggedIn ? userMenuItemsLoggedIn : userMenuItems" [popup]="true"></p-menu>
+                <p-button icon="pi pi-bell" styleClass="p-button-rounded p-button-warning p-button-outlined"></p-button>
+                <p-button icon="pi pi-user" styleClass="p-button-rounded p-button-info p-button-outlined"
+                    (click)="userMenu.toggle($event)"></p-button>
+                    <p-button icon="pi pi-shopping-cart"
+                    styleClass="p-button-rounded p-button-danger p-button-outlined"></p-button>
+            </div>
+        </div>
+    </ng-template>
+</p-menubar>
+
