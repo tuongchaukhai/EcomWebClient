@@ -36,7 +36,7 @@ export class CustomerService implements ICustomerService {
         // create a temporary link
         const link = document.createElement('a');
         link.href = window.URL.createObjectURL(blob);
-        link.download = 'products.csv';
+        link.download = 'customers.csv';
         //click on the link to trigger the download
         document.body.appendChild(link);
         link.click();
@@ -46,7 +46,7 @@ export class CustomerService implements ICustomerService {
         link.remove();
       });
   }
-  
+
   edit(customer: any): Observable<any> {
     return this.http.put<any>(`${this.url}`, customer).pipe(
       map(response => {

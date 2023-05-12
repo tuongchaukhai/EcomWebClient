@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { AuthService } from '../auth/service/auth.service';
-import { Observable } from 'rxjs';
-import { UserTokenInfo } from '../auth/dto/user-token-info.dto';
 import { ToastService } from '../services/toast.service';
 
 @Component({
@@ -19,7 +17,7 @@ import { ToastService } from '../services/toast.service';
         <p-splitButton label="Hello, {{name$}}" [model]="this.items" styleClass="p-button-text mr-2 "></p-splitButton>
       </ng-template>
       <p-overlayPanel #op (onShow)="notiOnShow()" [style]="{width: '500px'}" >
-      <div class="card" >
+      <div class="card scrollable-container" >
 
                 <div class="flex align-items-center justify-content-between mb-4">
                     <h5>Notifications</h5>
@@ -37,7 +35,8 @@ import { ToastService } from '../services/toast.service';
             </div>    
       </p-overlayPanel>
   </p-menubar>
-</div>`
+</div>`,
+  styleUrls: ['./admin-topbar.component.scss']
 })
 export class AdminTopbarComponent implements OnInit {
   items: MenuItem[] = [];
